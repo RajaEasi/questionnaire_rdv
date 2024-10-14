@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>570easi - Prise de rendez-vous</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="form-container">
+      <h1>570easi - Prise de rendez-vous</h1>
+      
+      <div class="progress-bar">
+        <div class="step active">Type de client</div>
+        <div class="step">Profil financier</div>
+        <div class="step">Rendez-vous</div>
+        <div class="step">Coordonnées</div>
+        <div class="step">Confirmation</div>
+      </div>
+
+      <form id="clientForm">
+        <div id="clientTypeSection">
+          <h2>Type de client</h2>
+          <label>
+            <input type="radio" name="isExistingClient" value="no" required> Nouveau client
+          </label>
+          <label>
+            <input type="radio" name="isExistingClient" value="yes" required> Client existant
+          </label>
+        </div>
+
+        <div id="financialProfileSection" style="display: none;">
+          <h2>Votre profil financier</h2>
+          
+          <fieldset>
+            <legend>Objet(s) du rendez-vous (sélectionnez au moins un)</legend>
+            <label>
+              <input type="checkbox" name="projectGoal" value="optimisation_fiscale" required> Optimisation fiscale
+            </label>
+            <label>
+              <input type="checkbox" name="projectGoal" value="epargner"> Épargner
+            </label>
+            <label>
+              <input type="checkbox" name="projectGoal" value="preparer_retraite"> Préparer ma retraite
+            </label>
+            <label>
+              <input type="checkbox" name="projectGoal" value="fructifier_capital"> Faire fructifier mon capital
+            </label>
+            <label>
+              <input type="checkbox" name="projectGoal" value="renseignement"> Renseignement
+            </label>
+            <label>
+              <input type="checkbox" name="projectGoal" value="revenu_supplementaire"> Avoir une source de revenu supplémentaire
+            </label>
+          </fieldset>
+
+          <label for="incomeRange">Vos revenus annuels</label>
+          <input type="range" id="incomeRange" name="incomeRange" min="0" max="200000" step="1000" oninput="updateRangeValue('incomeRange', 'incomeOutput')" required>
+          <output id="incomeOutput">0 €</output>
+
+          <label for="savingsRange">Votre épargne disponible</label>
+          <input type="range" id="savingsRange" name="savingsRange" min="0" max="500000" step="10000" oninput="updateRangeValue('savingsRange', 'savingsOutput')" required>
+          <output id="savingsOutput">0 €</output>
+        </div>
+
+        <div id="appointmentSection" style="display: none;">
+          <h2>Choisissez un créneau de rendez-vous</h2>
+          <div id="availableSlots"></div>
+        </div>
+
+        <div id="contactSection" style="display: none;">
+          <h2>Vos coordonnées</h2>
+          <p class="info-text">Ces informations sont indispensables pour une prise en charge rapide de votre rendez-vous.</p>
+          <label for="firstName">Prénom</label>
+          <input type="text" id="firstName" name="firstName" required>
+          
+          <label for="lastName">Nom</label>
+          <input type="text" id="lastName" name="lastName" required>
+          
+          <label for="email">Adresse e-mail</label>
+          <input type="email" id="email" name="email" required>
+          
+          <label for="phone">Numéro de téléphone</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+
+        <div id="confirmationSection" style="display: none;">
+          <h2>Confirmation de votre rendez-vous</h2>
+          <p>Votre rendez-vous est confirmé pour le : <span id="confirmedDate"></span></p>
+          <p>Nous vous contacterons prochainement pour confirmer les détails.</p>
+        </div>
+
+        <div class="button-container">
+          <button type="button" id="backButton" onclick="previousStep()" style="display: none;">RETOUR</button>
+          <button type="button" id="nextButton" onclick="nextStep()">SUIVANT</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
